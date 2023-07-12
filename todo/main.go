@@ -55,10 +55,25 @@ const (
 //						   use it.  See github.com/spf13/cobra for information
 //						   on how to use it.
 //
-//	 YOUR ANSWER: <GOES HERE>
+//	 YOUR ANSWER:	This function defines the flags that can be used in our CLI tool and
+//					then processes the flags that were input by the user in the CLI tool.
+//					The first few lines, each flag option is created as a defined type 
+//					(String, Bool, Int, etc.) using methods from the "flag" package and 
+//					bound to the global variables that were set up above.  Each flag 
+//					option is assigned an input symbol ("db", "l", "q" etc.), value, and
+//					help message.  After all flags are defined, the command "flag.Parse()"
+//					is used to parse the inputs provided in the command line by the user.
+//					Return variable "appOpt" of type "AppOptType" is intialized to the 
+//					"INVALID_APP_OPT" constant value defined above.  Then the function 
+//					checks to ensure that flags are provided, and if not the function 
+//					returns with an error that no flags are set.  Once through the input 
+//					check, the function looks at all of the provided flags and sets 
+//					"appOpt" to the corresponding contant value defined above.  The
+//					function does one final check that flags were input correctly and if 
+//					it passes finally returns the "appOpt" type value.
+
 func processCmdLineFlags() (AppOptType, error) {
 	flag.StringVar(&dbFileNameFlag, "db", "./data/todo.json", "Name of the database file")
-
 	flag.BoolVar(&listFlag, "l", false, "List all the items in the database")
 	flag.IntVar(&queryFlag, "q", 0, "Query an item in the database")
 	flag.StringVar(&addFlag, "a", "", "Add an item to the database")

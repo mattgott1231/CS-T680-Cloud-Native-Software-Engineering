@@ -221,18 +221,18 @@ func main() {
 		//For the CHANGE_ITEM_STATUS extra credit you will also
 		//need to add some code here
 		fmt.Println("Running CHANGE_ITEM_STATUS...")
-		item, err := todo.GetItem(queryFlag)
-		if err != nil {
-			fmt.Println("Error: ", err)
+		item, err1 := todo.GetItem(queryFlag)
+		if err1 != nil {
+			fmt.Println("Error: ", err1)
 			break
 		}
-		err := todo.ChangeItemDoneStatus(item.Id, itemStatusFlag)
-		if err != nil {
-			fmt.Println("Error: ", err)
+		err2 := todo.ChangeItemDoneStatus(item.Id, itemStatusFlag)
+		if err2 != nil {
+			fmt.Println("Error: ", err2)
 			break
 		}
 		fmt.Println("Ok")
-		
+
 	default:
 		fmt.Println("INVALID_APP_OPT")
 	}

@@ -103,8 +103,9 @@ func (t *ToDo) AddItem(item ToDoItem) error {
 		}
 		t.toDoMap[item.Id] = item
 		return t.saveDB()
+	} else {
+		return err
 	}
-	return err
 }
 
 // DeleteItem accepts an item id and removes it from the DB.
@@ -138,8 +139,9 @@ func (t *ToDo) DeleteItem(id int) error {
 			return t.saveDB()
 		} 
 		return errors.New("Item does not exist in database")
+	} else {
+		return err
 	}
-	return err
 }
 
 // UpdateItem accepts a ToDoItem and updates it in the DB.
@@ -173,8 +175,9 @@ func (t *ToDo) UpdateItem(item ToDoItem) error {
 			return t.saveDB()
 		}
 		return errors.New("Item does not exist in database")
+	} else {
+		return err
 	}
-	return err
 }
 
 // GetItem accepts an item id and returns the item from the DB.
@@ -208,8 +211,9 @@ func (t *ToDo) GetItem(id int) (ToDoItem, error) {
 			return item, nil
 		}
 		return ToDoItem{}, errors.New("Item does not exist in database")
+	} else {
+		return ToDoItem{}, err
 	}
-	return ToDoItem{}, err
 }
 
 // GetAllItems returns all items from the DB.  If successful it
@@ -239,8 +243,9 @@ func (t *ToDo) GetAllItems() ([]ToDoItem, error) {
 			toDoList = append(toDoList, value)
 		}
 		return toDoList, nil
+	} else {
+		return []ToDoItem{}, err
 	}
-	return []ToDoItem{}, err
 }
 
 
@@ -307,10 +312,12 @@ func (t *ToDo) ChangeItemDoneStatus(id int, value bool) error {
 		if item, err2 := t.GetItem(id); err2 == nil {
 			item.IsDone = value
 			return t.UpdateItem(item)
+		} else {
+			return err2
 		}
-		return err2
+	} else {
+		return err1
 	}
-	return err1
 }
 
 //------------------------------------------------------------

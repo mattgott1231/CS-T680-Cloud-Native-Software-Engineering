@@ -1,0 +1,61 @@
+package main
+
+import (
+	"flag"
+	"fmt"
+	"os"
+
+	"drexel.edu/polls/api"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
+
+// Global variables to hold the command line flags to drive the voters CLI
+// application
+var (
+	hostFlag string
+	portFlag uint
+)
+
+func processCmdLineFlags() {
+
+	//Note some networking lingo, some frameworks start the server on localhost
+	//this is a local-only interface and is fine for testing but its not accessible
+	//from other machines.  To make the server accessible from other machines, we
+	//need to listen on an interface, that could be an IP address, but modern
+	//cloud servers may have multiple network interfaces for scale.  With TCP/IP
+	//the address 0.0.0.0 instructs the network stack to listen on all interfaces
+	//We set this up as a flag so that we can overwrite it on the command line if
+	//needed
+	flag.StringVar(&hostFlag, "h", "0.0.0.0", "Listen on all interfaces")
+	flag.UintVar(&portFlag, "p", 1090, "Default Port")
+
+	flag.Parse()
+}
+
+// main is the entry point for our poll API application.  It processes
+// the command line flags and then uses the db package to perform the
+// requested operation
+func main() {
+	processCmdLineFlags()
+	r := gin.Default()
+	r.Use(cors.Default())
+
+	apiHandler, err := api.New()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	r.GET("/polls", apiHandler.ListAllPolls)
+	r.POST("/polls", apiHandler.AddPoll)
+	r.PUT("/polls", apiHandler.UpdatePoll)
+	r.DELETE("/polls", apiHandler.DeleteAllPolls)
+	r.DELETE("/polls/:id", apiHandler.DeletePoll)
+	r.GET("/polls/:id", apiHandler.GetPoll)
+	r.GET("/polls/health", apiHandler.GetHealthData)
+	r.GET("/crash", apiHandler.CrashSim)
+
+	serverPath := fmt.Sprintf("%s:%d", hostFlag, portFlag)
+	r.Run(serverPath)
+}

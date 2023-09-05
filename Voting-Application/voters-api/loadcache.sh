@@ -1,0 +1,4 @@
+#!/bin/bash
+curl -d '{ "VoterID": 1, "FirstName": "John", "LastName": "Doe", "VoteHistory": [{"PollID":1,"VoteDate":"2023-07-25T23:36:24.820414-04:00"},{"PollID":2,"VoteDate":"2023-07-25T23:36:24.820414-04:00"}]}' -H "Content-Type: application/json" -X POST http://localhost:1080/voters
+curl -d '{ "VoterId": 2, "FirstName": "Jane", "LastName": "Doe", "VoteHistory": [{"PollID":1,"VoteDate":"2023-07-25T23:36:24.820414-04:00"},{"PollID":2,"VoteDate":"2023-07-25T23:36:24.820414-04:00"}]}' -H "Content-Type: application/json" -X POST http://localhost:1080/voters 	
+curl -d '{ "VoterId": 3, "FirstName": "Bob", "LastName": "Trudy", "VoteHistory": [{"PollID":1,"VoteDate":"2023-07-25T23:36:24.820414-04:00"},{"PollID":2,"VoteDate":"2023-07-25T23:36:24.820414-04:00"}]}' -H "Content-Type: application/json" -X POST http://localhost:1080/voters 	

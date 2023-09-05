@@ -24,7 +24,7 @@ GET All Votes: 1100/votes/
 
 POST Vote: 1100/votes/:id
 
-DELETE All Votes: 1100/votes
+DELETE All Votes: 1100/votes/
 
 DELETE Vote: 1100/votes/:id
 
@@ -34,7 +34,7 @@ GET All Voters: 1080/voters/
 
 POST Voter: 1080/voters/:id
 
-DELETE All Voters: 1080/voters
+DELETE All Voters: 1080/voters/
 
 DELETE Voter: 1080/voters/:id
 
@@ -52,7 +52,7 @@ GET All Polls: 1090/Polls/
 
 POST Poll: 1090/polls/:id
 
-DELETE All Polls: 1090/polls
+DELETE All Polls: 1090/polls/
 
 DELETE Poll: 1090/polls/:id
 
